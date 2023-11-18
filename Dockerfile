@@ -9,6 +9,7 @@ COPY package*.json ./
 
 # Install the application's dependencies
 RUN npm install
+RUN npm i -g pm2
 
 # If you're building your code for production
 # RUN npm ci --only=production
