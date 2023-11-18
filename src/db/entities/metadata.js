@@ -22,10 +22,6 @@ const metadataSchema = new mongoose.Schema({
     required: true,
     default: 'other'
   },
-  mediaHash: {
-    type: String,
-    required: false // You can omit this line as it's not required by default
-  },
   attestationHash: {
     type: String,
     required: false

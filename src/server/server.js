@@ -31,7 +31,6 @@ const addRoutes = () => {
         throw new Error("There isn't any metadata in the DB with this txHash")
       }
       const attestationHash = await createNewAttestationRecord({
-        mediaHash: metadata.mediaHash,
         ipfs: metadata.ipfsHash,
         description: metadata.description,
         txHash: metadata.txHash,

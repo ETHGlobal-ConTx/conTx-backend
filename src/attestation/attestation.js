@@ -8,7 +8,6 @@ const createNewAttestationRecord = async ({
                                             category,
                                             description,
                                             ipfs,
-                                            mediaHash,
                                             attestationChain,
                                           }) => {
   const {infuraPrefix, easContractAddress, schemaUID} = getAttestationAddressesPerChain(attestationChain)
@@ -23,15 +22,14 @@ const createNewAttestationRecord = async ({
 // Signer must be an ethers-like signer.
   await eas.connect(signer);
 // Initialize SchemaEncoder with the schema string
-  const schemaEncoder = new SchemaEncoder("address Sender,string TransactionHash,string Category,string Description,string IPFS,string MediaHash");
+  const schemaEncoder = new SchemaEncoder("address Sender,string TransactionHash,string Category,string Description,string IPFS");
 
   const data = [
     {name: "Sender", value: sender, type: "address"},
     {name: "TransactionHash", value: txHash || '', type: "string"},
     {name: "Category", value: category || "", type: "string"},
     {name: "Description", value: description || "", type: "string"},
-    {name: "IPFS", value: ipfs || "", type: "string"},
-    {name: "MediaHash", value: mediaHash || '', type: "string"}
+    {name: "IPFS", value: ipfs || "", type: "string"}
   ]
   console.log('**data**', data)
   const encodedData = schemaEncoder.encodeData(data);
