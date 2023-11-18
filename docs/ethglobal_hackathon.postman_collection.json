@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://dev.serve.giveth.io/metadata",
+					"raw": "https://dev.serve.giveth.io/ethglobal_hackathon/metadata",
 					"protocol": "https",
 					"host": [
 						"dev",
@@ -30,6 +30,7 @@
 						"io"
 					],
 					"path": [
+						"ethglobal_hackathon",
 						"metadata"
 					]
 				}
@@ -51,7 +52,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://dev.serve.giveth.io/attestation",
+					"raw": "https://dev.serve.giveth.io/ethglobal_hackathon/attestation",
 					"protocol": "https",
 					"host": [
 						"dev",
@@ -60,6 +61,7 @@
 						"io"
 					],
 					"path": [
+						"ethglobal_hackathon",
 						"attestation"
 					]
 				}
@@ -82,7 +84,7 @@
 					]
 				},
 				"url": {
-					"raw": "https://dev.serve.giveth.io/ipfs",
+					"raw": "https://dev.serve.giveth.io/ethglobal_hackathon/ipfs",
 					"protocol": "https",
 					"host": [
 						"dev",
@@ -91,6 +93,7 @@
 						"io"
 					],
 					"path": [
+						"ethglobal_hackathon",
 						"ipfs"
 					]
 				}
@@ -134,7 +137,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://dev.serve.giveth.io/metadata?tx_hashes=0x12f5b8bd52e125a1671830cc1a0264e8b12960f53fafba80b59796aabfe478f4",
+					"raw": "https://dev.serve.giveth.io/ethglobal_hackathon/metadata?tx_hashes=0x12f5b8bd52e125a1671830cc1a0264e8b12960f53fafba80b59796aabfe478f4",
 					"protocol": "https",
 					"host": [
 						"dev",
@@ -143,6 +146,7 @@
 						"io"
 					],
 					"path": [
+						"ethglobal_hackathon",
 						"metadata"
 					],
 					"query": [
