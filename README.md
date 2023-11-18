@@ -15,6 +15,6 @@ This application is backend part of our hackathon project for EthGlobal Istanbul
 4. `docker-compose up -d --build`
 
 # API Documentation
-There is a postman collection in ./docs . You can import it to your postman and test the API.
+There is a postman collection in [Documentations](https://github.com/ETHGlobal-ConTx/conTx-backend/tree/master/docs) . You can import it to your postman and test the API.
 
 
