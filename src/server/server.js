@@ -7,7 +7,7 @@ const cors = require('cors');
 require('dotenv').config(); // Make sure to require dotenv if you're using a .env file
 const {initDb} = require('../db/setup');
 const { createNewAttestationRecord} = require("../attestation/attestation");
-const {findMetadatasWithTxHashes, createOrUpdateMetadata} = require("../db/repositories/metadataRepository");
+const {findMetadatasWithTxHashes, createOrUpdateMetadata, findMetadataWithTxHash} = require("../db/repositories/metadataRepository");
 
 
 
@@ -15,25 +15,41 @@ const addRoutes = () => {
   app.post('/metadata', async (req, res) => {
     console.log('req.body', req.body);
     const body = req.body
-    if (body.chain && !body.attestationChain ){
-      body.attestationChain = body.txChain
-    }
     const result = await createOrUpdateMetadata({...body, timestamp: new Date().getTime()} )
-    const attestationHash = await createNewAttestationRecord({
-      mediaHash: result.mediaHash,
-      ipfs: result.ipfsHash,
-      description: result.description,
-      txHash: result.txHash,
-      category: result.category,
-      attestationChain: result.attestationChain,
-      sender: result.sender
-    })
-    const finalResult = await createOrUpdateMetadata({
-      attestationHash,
-      txHash: result.txHash,
+    res.send(result);
+  });
 
-    })
-    res.send(finalResult);
+
+  app.post('/attestation', async (req, res) => {
+
+    try {
+      console.log('req.body', req.body);
+      const body = req.body
+      const {attestationChain,txHash } = body
+      const metadata = await findMetadataWithTxHash(txHash)
+      if (!metadata){
+        throw new Error("There isn't any metadata in the DB with this txHash")
+      }
+      const attestationHash = await createNewAttestationRecord({
+        mediaHash: metadata.mediaHash,
+        ipfs: metadata.ipfsHash,
+        description: metadata.description,
+        txHash: metadata.txHash,
+        category: metadata.category,
+        sender: metadata.sender,
+        attestationChain: attestationChain
+      })
+      const finalResult = await createOrUpdateMetadata({
+        attestationHash,
+        attestationChain,
+        txHash: metadata.txHash,
+
+      })
+      res.send(finalResult);
+    } catch (e) {
+      console.log('Error in POST /attestation', e)
+      res.status(400).send({message: e.message})
+    }
   });
 
 
@@ -52,10 +68,6 @@ const addRoutes = () => {
   app.post('/login',(req, res)=>{
     return res.send('Success')
   } )
-
-
-
-
 }
 
 const initServer = async () => {

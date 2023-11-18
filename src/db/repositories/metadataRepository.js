@@ -38,4 +38,20 @@ const findMetadatasWithTxHashes = async (txHashes) => {
   }
 };
 
-module.exports = { createOrUpdateMetadata, findMetadatasWithTxHashes} ;
+/**
+ * Finds a single metadata record by transaction hash.
+ *
+ * @param {string} txHash - The transaction hash to search for.
+ * @returns {Promise<Object|null>} - A promise that resolves to the metadata record or null if not found.
+ */
+const findMetadataWithTxHash = async (txHash) => {
+  try {
+    const metadata = await Metadata.findOne({ txHash: txHash });
+    return metadata;
+  } catch (error) {
+    console.error('Error finding metadata record:', error);
+    throw error; // Rethrow the error for the caller to handle
+  }
+};
+
+module.exports = { createOrUpdateMetadata, findMetadatasWithTxHashes, findMetadataWithTxHash} ;
