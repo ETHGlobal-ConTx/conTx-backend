@@ -6,16 +6,34 @@ const cors = require('cors');
 
 require('dotenv').config(); // Make sure to require dotenv if you're using a .env file
 const {initDb} = require('../db/setup');
-const {initAttestation} = require("../attestation/attestation");
+const { createNewAttestationRecord} = require("../attestation/attestation");
 const {findMetadatasWithTxHashes, createOrUpdateMetadata} = require("../db/repositories/metadataRepository");
 
 
 
 const addRoutes = () => {
   app.post('/metadata', async (req, res) => {
-    console.log(req.body);
-    const result = await createOrUpdateMetadata(req.body)
-    res.send(result);
+    console.log('req.body', req.body);
+    const body = req.body
+    if (body.chain && !body.attestationChain ){
+      body.attestationChain = body.txChain
+    }
+    const result = await createOrUpdateMetadata({...body, timestamp: new Date().getTime()} )
+    const attestationHash = await createNewAttestationRecord({
+      mediaHash: result.mediaHash,
+      ipfs: result.ipfsHash,
+      description: result.description,
+      txHash: result.txHash,
+      category: result.category,
+      attestationChain: result.attestationChain,
+      sender: result.sender
+    })
+    const finalResult = await createOrUpdateMetadata({
+      attestationHash,
+      txHash: result.txHash,
+
+    })
+    res.send(finalResult);
   });
 
 
@@ -43,6 +61,7 @@ const addRoutes = () => {
 const initServer = async () => {
 
   // await initAttestation()
+
 
   // Initialize the database connection
   initDb();

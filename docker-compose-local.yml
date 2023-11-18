@@ -16,6 +16,7 @@ services:
 
   app:
     build: .
+    restart: always
     ports:
       - "3003:3003"
     environment:
