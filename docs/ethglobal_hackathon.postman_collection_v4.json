@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "ab20bcc8-57c4-4288-9a92-b6c6930c37f6",
+		"name": "ethglobal_hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "318034"
+	},
+	"item": [
+		{
+			"name": "Create new metdata",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sender\":\"0x3194Cd0B46183e8058AB3981Fa2F37e01BE7DF66\",\n    \"description\":\"description\",\n    \"txHash\":\"0xee9b12edd2259764f7a78331a5360e27e966e0ffd15c47a622ec3b613ec441e7\",\n    \"ipfsHash\":\"0xee9b12edd2259764f7a78331a5360e27e966e0ffd15c47a622ec3b613ec441e6\",\n     \"mediaHash\":\"0xee9b12edd2259764f7a78331a5360e27e966e0ffd15c47a622ec3b613ec441e6\",\n    \"category\":\"other2\",\n    \"txChain\":\"baseGoerli\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.serve.giveth.io/metadata",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"serve",
+						"giveth",
+						"io"
+					],
+					"path": [
+						"metadata"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload to attestation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"txHash\":\"0xee9b12edd2259764f7a78331a5360e27e966e0ffd15c47a622ec3b613ec441e7\",\n    \"attestationChain\": \"baseGoerli\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.serve.giveth.io/attestation",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"serve",
+						"giveth",
+						"io"
+					],
+					"path": [
+						"attestation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload to ipfs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/renjer/Downloads/image_2023-11-18_15-29-08.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://dev.serve.giveth.io/ipfs",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"serve",
+						"giveth",
+						"io"
+					],
+					"path": [
+						"ipfs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"description\":\"description\",\n    \"txHash\":\"1\",\n    \"category\":\"other2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dev.serve.giveth.io/ethglobal_hackathon/login",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"serve",
+						"giveth",
+						"io"
+					],
+					"path": [
+						"ethglobal_hackathon",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get metadata by list of tx_hashes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://dev.serve.giveth.io/metadata?tx_hashes=0x12f5b8bd52e125a1671830cc1a0264e8b12960f53fafba80b59796aabfe478f4",
+					"protocol": "https",
+					"host": [
+						"dev",
+						"serve",
+						"giveth",
+						"io"
+					],
+					"path": [
+						"metadata"
+					],
+					"query": [
+						{
+							"key": "tx_hashes",
+							"value": "0x12f5b8bd52e125a1671830cc1a0264e8b12960f53fafba80b59796aabfe478f4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
