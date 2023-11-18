@@ -14,6 +14,15 @@ services:
     volumes:
       - mongodb_data_container:/data/db
 
+  app:
+    build: .
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
 
 volumes:
