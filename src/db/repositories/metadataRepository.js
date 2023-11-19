@@ -9,7 +9,6 @@ const Metadata = require('../entities/metadata'); // Ensure this path points to 
  */
 function createOrUpdateMetadata(metadataFields) {
   const { txHash } = metadataFields;
-
   return Metadata.findOneAndUpdate(
     { txHash }, // find a document with matching txHash
     { $set: metadataFields }, // fields to be updated

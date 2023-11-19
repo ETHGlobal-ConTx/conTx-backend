@@ -21,6 +21,10 @@ const {pinFile} = require("../utils/utils");
 const addRoutes = () => {
   app.post('/metadata', async (req, res) => {
     console.log('req.body', req.body);
+    //TODO Should validate the body and get tx info from chain to make sure the person who
+    // sent the tx is the owner of the senderAddress
+    // Should validate the the category to make sure it's one of the allowed ones
+
     const body = req.body
     const result = await createOrUpdateMetadata({...body, timestamp: new Date().getTime()})
     res.send(result);
@@ -28,7 +32,6 @@ const addRoutes = () => {
 
 
   app.post('/attestation', async (req, res) => {
-
     try {
       console.log('req.body', req.body);
       const body = req.body
@@ -66,12 +69,15 @@ const addRoutes = () => {
       requestQuery: req.query
     })
     const txHashes = req.query.tx_hashes.split(',');
+    //TODO We may want to add pagination to this endpoint
+    // And maybe we make some metadata private and only show them to the owner
     const metadatas = await findMetadatasWithTxHashes(txHashes)
     res.send(metadatas);
   })
 
 
   app.post('/login', (req, res) => {
+    //TODO We need to verify the user's signature and return a JWT token
     return res.send('Success')
   })
 
