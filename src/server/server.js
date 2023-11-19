@@ -96,7 +96,9 @@ const addRoutes = () => {
       });
 
       // Return the IPFS link
-      return res.send(`${process.env.PINATA_GATEWAY_ADDRESS}/ipfs/${response.data.IpfsHash}`);
+      return res.send({
+        url: `${process.env.PINATA_GATEWAY_ADDRESS}/ipfs/${response.data.IpfsHash}`
+      });
     } catch (e) {
       console.error('upload() error', e);
       res.status(400).send(e.message);
